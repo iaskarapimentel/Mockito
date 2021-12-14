@@ -24,8 +24,7 @@ public class MathApplicationTest {
     //TODO
 
     @Mock
-    //TODO
-
+    CalculatorService calculator;
 
     @Captor
     //TODO
@@ -33,41 +32,62 @@ public class MathApplicationTest {
     @Test
     @DisplayName("Use of When()  and thenReturn()")
     public void testMathApplicationUsingWhen() {
-        //add the expectations of calc service calls
-        //TODO
+//        add the expectations of calc service calls
+//        Mocks can return different values depending on arguments passed into a method.
+//        The when(…).thenReturn(…) method chain is used to specify
+//        a return value for a method call with pre-defined parameters.
+        Mockito.when(calculator.add(14, 11)).thenReturn(25.0);
+        Mockito.when(calculator.subtract(26, 1)).thenReturn(25.0);
+        Mockito.when(calculator.multiply(5, 5)).thenReturn(25.0);
+        Mockito.when(calculator.divide(50,2)).thenReturn(25.0);
     }
 
     @Test
     @DisplayName("Verify method calls")
     public void testMathApplicationUsingVerify() {
 
-        //TODO
+        calculator.add(30,1);
+        calculator.subtract(32, 1);
+        calculator.multiply(6.2, 5);
+        calculator.divide(62,2);
 
         //verify calc service calls made for the above calls
-        //TODO
-
+        verify(calculator).add(30,1);
+        verify(calculator).subtract(32,1);
+        verify(calculator).multiply(6.2, 5);
+        verify(calculator).divide(62,2);
     }
 
     @Test
     @DisplayName("No' of method invocations/calls")
     public void testVerifyNoOfMethodCalls() {
 
-        //TODO
+        calculator.add(30,1);
+        calculator.subtract(32,1);
+        calculator.multiply(6.2,5);
+        calculator.divide(62,2);
 
         //verify calc service calls made for the above calls
-        //TODO
-
+        verify(calculator, times(3)).add(30,1);
+        verify(calculator, times(2)).subtract(30,1);
+        verify(calculator, never()).multiply(30,1);
+        verify(calculator, times(1)).divide(62,2);
     }
 
     @Test
     @DisplayName("No' of method invocations/calls - 2")
     public void testVerifyNoOfMethodCalls2() {
 
-        //TODO
+        calculator.add(30,1);
+        calculator.subtract(32,1);
+        calculator.multiply(6.2,5);
+        calculator.divide(62,2);
 
         //verify calc service calls made for the above calls
-        //TODO
-
+       verify(calculator, atMost(3)).add(30,1);
+       verify(calculator, atLeast(2)).subtract(32,1);
+       verify(calculator, atLeastOnce()).divide(62,2);
+       verify(calculator, never()).multiply(6.2,5);
     }
 
     @Test
@@ -75,7 +95,7 @@ public class MathApplicationTest {
     public void verify_ExceptionHandling() {
 
         //add the expected exceptions thrown for the below method calls
-        //TODO
+        when(calculator.add(null, null))
     }
 
 
